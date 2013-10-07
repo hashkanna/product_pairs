@@ -11,3 +11,4 @@ pig -f scripts/product_pairs.pig
 
 To Do:
 1. Store input files using Avro with snappy compression
+2. Modify joins by copying smaller data files to Hadoop's Distributed Cache
