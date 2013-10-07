@@ -32,6 +32,6 @@ product_pair_grp = GROUP product_pair_ordered BY (prod1, prod2);
 product_pair_count = FOREACH product_pair_grp GENERATE group AS productpair, COUNT(product_pair_ordered) AS total;
 
 -- filter where count > 3000
-product_pair_final = FILTER product_pair_count BY (total < 3000);
+product_pair_final = FILTER product_pair_count BY (total > 3000);
 final_output = FOREACH product_pair_final GENERATE productpair, total;
 DUMP final_output;

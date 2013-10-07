@@ -7,7 +7,8 @@ hadoop fs -copyFromLocal /data/wgsn/* /data/wgsn/
 https://github.com/downloads/linkedin/datafu/datafu-0.0.4.tar.gz
 
 Execute:
-pig -f scripts/product_pairs.pig 
+1. pig -f scripts/product_pairs.pig 
+2. When running on small sample datasets, change the (total > 3000) condition accordingly on line 35 of scripts/product_pairs.pig
 
 To Do:
 1. Store input files using Avro with snappy compression
