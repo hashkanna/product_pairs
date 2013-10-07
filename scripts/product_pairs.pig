@@ -25,8 +25,10 @@ user_product_final = FOREACH user_product_uk_joined GENERATE $2 AS user, $3 AS p
 user_grp = GROUP user_product_final BY user;
 product_pair = FOREACH user_grp GENERATE FLATTEN(UnorderedPairs(user_product_final.product));
 product_pair_flat = FOREACH product_pair GENERATE FLATTEN($0) AS prod1, FLATTEN($1) AS prod2;
+
 -- order the unordered pairs so that (ipad,iphone) is the same as (iphone,ipad)
 product_pair_ordered = FOREACH product_pair_flat GENERATE FLATTEN(($0<$1?($0,$1):($1,$0))) AS (prod1, prod2);
+
 -- count each unordered pair
 product_pair_grp = GROUP product_pair_ordered BY (prod1, prod2);
 product_pair_count = FOREACH product_pair_grp GENERATE group AS productpair, COUNT(product_pair_ordered) AS total;
